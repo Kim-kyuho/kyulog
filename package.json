@@ -36,6 +36,7 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "slugify": "^1.6.6",
+    "tailwind-scrollbar": "^4.0.2",
     "tailwindcss-bg-patterns": "^0.3.0",
     "tailwindcss-textshadow": "^2.1.3"
   },
