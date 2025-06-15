@@ -108,20 +108,24 @@ export default function Search() {
                 </button>
                 {showCategories && (
                   <div className="absolute z-10 mt-1 w-44 rounded-md bg-white ring-1 ring-gray-300 focus:outline-none">
-                    <div className="py-1 max-h-40 overflow-y-auto">
-                      <button
-                        onClick={() => { setSelectedCategory(null); setShowCategories(false); }}
-                        className="block w-full px-4 py-2 text-left text-sm text-green-700 hover:bg-green-50 dark:hover:bg-white active:scale-95 transition-transform"
-                      >All</button>
-                      {uniqueCategories.map((cat) => (
+                    <div className="relative max-h-40 overflow-y-auto">
+                      <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-b from-white to-transparent pointer-events-none z-10" />
+                      <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
+                      <div className="py-1">
                         <button
-                          key={cat}
-                          onClick={() => { setSelectedCategory(cat); setShowCategories(false); }}
+                          onClick={() => { setSelectedCategory(null); setShowCategories(false); }}
                           className="block w-full px-4 py-2 text-left text-sm text-green-700 hover:bg-green-50 dark:hover:bg-white active:scale-95 transition-transform"
-                        >
-                          {cat}
-                        </button>
-                      ))}
+                        >All</button>
+                        {uniqueCategories.map((cat) => (
+                          <button
+                            key={cat}
+                            onClick={() => { setSelectedCategory(cat); setShowCategories(false); }}
+                            className="block w-full px-4 py-2 text-left text-sm text-green-700 hover:bg-green-50 dark:hover:bg-white active:scale-95 transition-transform"
+                          >
+                            {cat}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -141,20 +145,24 @@ export default function Search() {
                 </button>
                 {showTags && (
                   <div className="absolute z-10 mt-1 w-44 rounded-md bg-white ring-1 ring-gray-300 focus:outline-none">
-                    <div className="py-1 max-h-40 overflow-y-auto">
-                      <button
-                        onClick={() => { setSelectedTag(null); setShowTags(false); }}
-                        className="block w-full px-4 py-2 text-left text-sm text-red-700 hover:bg-pink-50 dark:hover:bg-white active:scale-95 transition-transform"
-                      >All</button>
-                      {uniqueTags.map((tag) => (
+                    <div className="relative max-h-40 overflow-y-auto">
+                      <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-b from-white to-transparent pointer-events-none z-10" />
+                      <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
+                      <div className="py-1">
                         <button
-                          key={tag}
-                          onClick={() => { setSelectedTag(tag); setShowTags(false); }}
+                          onClick={() => { setSelectedTag(null); setShowTags(false); }}
                           className="block w-full px-4 py-2 text-left text-sm text-red-700 hover:bg-pink-50 dark:hover:bg-white active:scale-95 transition-transform"
-                        >
-                          {tag}
-                        </button>
-                      ))}
+                        >All</button>
+                        {uniqueTags.map((tag) => (
+                          <button
+                            key={tag}
+                            onClick={() => { setSelectedTag(tag); setShowTags(false); }}
+                            className="block w-full px-4 py-2 text-left text-sm text-red-700 hover:bg-pink-50 dark:hover:bg-white active:scale-95 transition-transform"
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
