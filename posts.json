@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "create_project",
+    "title": "블로그 프로젝트 개시!",
+    "summary": "블로그 제작에 앞서..",
+    "date": "2025-05-03",
+    "category": "Programing",
+    "tags": [
+      "chat",
+      "dev"
+    ]
+  },
+  {
+    "slug": "hello-word",
+    "title": "Hello World",
+    "summary": "처음으로 작성하는 블로그 글입니다.",
+    "date": "2025-05-01",
+    "category": "Program",
+    "tags": [
+      "chat",
+      "introduce"
+    ]
+  },
+  {
+    "slug": "test-post",
+    "title": "테스트 포스팅",
+    "summary": "테스트 입니다.",
+    "date": "2025-05-01",
+    "category": "Program",
+    "tags": [
+      "Test"
+    ]
+  }
+]

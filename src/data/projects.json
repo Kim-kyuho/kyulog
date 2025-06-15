@@ -1,0 +1,42 @@
+[
+    {
+      "slug": "oracle-migration",
+      "title": "Oracleによるデータマイグレーション",
+      "description": "エネルギー系企業のシステムデータをOracle DBでマイグレーションしたプロジェクトです。",
+      "image": "/blog-images/project1.jpg",
+      "techStack": ["Oracle", "PL/SQL"],
+      "details": "エネルギー企業の老朽化したシステムから新しいOracleベースのシステムへのデータ移行を担当しました。SQLスクリプトの設計、データ整合性の検証およびテストプロセスを主導し、安全かつ正確なマイグレーションを実現しました。このプロジェクトを通じて、データ移行および品質管理に関する実務経験を積むことができました。"
+    },
+    {
+      "slug": "gis-system-enhancement",
+      "title": "GISベースの設備情報システム改善",
+      "description": "ArcGIS、C#、Vue.jsを活用した地図情報システムの保守および改善プロジェクトです。",
+      "image": "/blog-images/project2.jpg",
+      "techStack": ["ArcGIS", "C#", "Vue.js"],
+      "details": "ArcGISとVue.jsベースの設備情報システムにおいて、ユーザーの不満点を分析し、機能改善およびUI/UXの最適化を行いました。地図描画のパフォーマンス向上、検索機能の改善、データ連携の再構築などを通じて、使いやすさと信頼性を高めました。"
+    },
+    {
+      "slug": "point-automation",
+      "title": "ポイント付与自動化システム開発",
+      "description": "顧客ポイントの自動付与を目的としたシステムを設計・開発したプロジェクトです。",
+      "image": "/blog-images/project3.jpg",
+      "techStack": ["C#", "ASP.NET", "CMS Tool", "SQL Server", "HTML", "Shell Script"],
+      "details": "顧客の条件に基づき自動的にポイントを付与するシステムをゼロから設計・開発しました。ビジネスロジックの実装に加え、バッチプロセスの自動化や履歴管理機能の構築も担当しました。Shell ScriptとSQLを活用し、動作テストと検証も行いました。"
+    },
+    {
+      "slug": "vip-signup-system",
+      "title": "VIP顧客専用申請システム構築",
+      "description": "高額顧客向けの専用申込および審査システムを開発したプロジェクトです。",
+      "image": "/blog-images/project4.jpg",
+      "techStack": ["C#", "ASP.NET", "CMS Tool", "SQL Server", "HTML", "Shell Script"],
+      "details": "高額顧客向けの申込システムをCMSベースで開発し、管理者の審査機能やセキュリティ要件を考慮した権限制御ロジックを実装しました。フロントエンドとバックエンドの両方を担当し、ユーザビリティと保守性を意識した設計を行いました。"
+    },
+    {
+      "slug": "incident-maintenance",
+      "title": "エネルギー系システムの保守およびインシデント対応",
+      "description": "小規模システムの保守および障害対応業務を担当したプロジェクトです。",
+      "image": "/blog-images/project5.jpg",
+      "techStack": ["C#", "ASP.NET", "CMS Tool", "SQL Server", "HTML", "Shell Script"],
+      "details": "エネルギー企業の現場に常駐し、さまざまな小規模システムの保守およびインシデント対応を担当しました。障害発生時には原因分析と迅速な修正を行い、業務部門との円滑なコミュニケーションを通じて、問題解決能力と責任感を養いました。"
+    }
+  ]
