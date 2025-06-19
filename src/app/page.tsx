@@ -28,7 +28,7 @@ export default async function HomePage() {
         </p>
         <Link
           href="/projects"
-          className="inline-block mt-4 px-6 py-2 bg-pink-200 text-pink-950 rounded hover:bg-pink-400 dark:hover:bg-gray-800 active:scale-95 transition"
+          className="inline-block mt-4 px-6 py-2 bg-pink-200 text-pink-950 rounded hover:bg-pink-400 active:scale-95 transition"
         >
           View Projects →
         </Link>
@@ -78,7 +78,7 @@ export default async function HomePage() {
 
         <Link
           href="/blog"
-          className="mt-6 inline-block px-5 py-2 bg-pink-200 text-pink-950 font-semibold rounded hover:bg-pink-300 dark:hover:bg-gray-800 active:scale-95 transition"
+          className="mt-6 inline-block px-5 py-2 bg-pink-200 text-pink-950 font-semibold rounded hover:bg-pink-300 active:scale-95 transition"
         >
           View All Posts →
         </Link>

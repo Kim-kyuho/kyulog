@@ -82,7 +82,7 @@ export default function Search() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Search..."
-              className="w-full p-2 pr-10 bg-gray-100 border border-gray-300 rounded-full"
+              className="w-full p-2 pr-10 text-gray-800 bg-gray-100 border border-gray-300 rounded-full"
             />
             <button
               onClick={() => setQuery(inputValue)}
