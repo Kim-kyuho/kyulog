@@ -40,6 +40,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error }, { status: 500 });
   }
 
-  const imageUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/master/${githubPath}`;
+  const imageUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${githubPath}`;
   return NextResponse.json({ url: imageUrl, redirectTo: "/blog" });
 }
