@@ -3,9 +3,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllPosts } from "@/lib/posts";
 
-const REPO_OWNER = "Kim-kyuho";
-const REPO_NAME = "Kim-kyuho.github.io";
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const REPO_OWNER = process.env.REPO_OWNER;
+const REPO_NAME = process.env.REPO_NAME;
 
 export async function POST(req: NextRequest) {
   try {

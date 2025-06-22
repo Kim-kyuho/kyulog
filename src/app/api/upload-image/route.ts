@@ -2,9 +2,9 @@
 
 import { NextRequest, NextResponse } from "next/server";
 
-const REPO_OWNER = "Kim-kyuho";
-const REPO_NAME = "kyulog";
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const REPO_OWNER = process.env.REPO_OWNER;
+const REPO_NAME = process.env.REPO_NAME;
 
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
