@@ -23,6 +23,20 @@ export async function POST(req: NextRequest) {
   const githubPath = `public/blog-images/${filename}`;
   const githubApiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${githubPath}`;
 
+  let sha: string | undefined = undefined;
+
+  const checkRes = await fetch(githubApiUrl, {
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (checkRes.ok) {
+    const fileInfo = await checkRes.json();
+    sha = fileInfo.sha;
+  }
+
   const uploadRes = await fetch(githubApiUrl, {
     method: "PUT",
     headers: {
@@ -32,6 +46,7 @@ export async function POST(req: NextRequest) {
     body: JSON.stringify({
       message: `画像 ${filename} をアップロード`,
       content,
+      ...(sha && { sha }),
     }),
   });
 
