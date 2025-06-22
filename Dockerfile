@@ -1,15 +1,15 @@
-# 1. Node.js가 설치된 공식 이미지 사용
+# 1. Node.jsがインストールされた公式イメージを使用
 FROM node:20-alpine
 
-# 2. 컨테이너 안에서 작업할 디렉토리 설정
+# 2. コンテナ内で作業するディレクトリを設定
 WORKDIR /app
 
-# 3. package.json만 먼저 복사해서 의존성 설치
+# 3. package.jsonを先にコピーして依存関係をインストール
 COPY package*.json ./
 RUN npm install
 
-# 4. 나머지 소스코드 복사
+# 4. その他のソースコードをコピー
 COPY . .
 
-# 5. Next.js 개발 서버 실행
+# 5. Next.jsの開発サーバーを実行
 CMD ["npm", "run", "dev"]
