@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const REPO_OWNER = "Kim-kyuho";
-const REPO_NAME = "Kim-kyuho.github.io";
+const REPO_NAME = "kyulog";
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
 
 export async function POST(req: NextRequest) {

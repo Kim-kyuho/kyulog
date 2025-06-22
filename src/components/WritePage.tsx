@@ -166,8 +166,6 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
               const after = content.slice(cursorPos);
               setContent(`${before}\n\n![image](${url})\n\n${after}`);
             } else {
-              const error = await res.text();
-              console.error("Upload failed:", error);
               alert("Image upload failed 😢");
             }
           }}
@@ -204,8 +202,6 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
                 const after = content.slice(cursorPos);
                 setContent(`${before}\n\n![image](${url})\n\n${after}`);
               } else {
-                const error = await res.text();
-                console.error("Upload failed:", error);
                 alert("Image upload failed 😢");
               }
 
