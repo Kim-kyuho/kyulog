@@ -181,28 +181,39 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
           <input
             type="file"
             accept="image/*"
+            multiple
             onChange={async (e) => {
-              const file = e.target.files?.[0];
-              if (!file || !file.type.startsWith("image/")) return alert("Only image files can be uploaded!");
+              const files = e.target.files;
+              if (!files || files.length === 0) return;
 
-              const formData = new FormData();
-              formData.append("file", file);
+              for (const file of files) {
+                if (!file.type.startsWith("image/")) {
+                  alert("Only image files can be uploaded!");
+                  continue;
+                }
 
-              const res = await fetch("/api/upload-image", {
-                method: "POST",
-                body: formData,
-              });
+                const formData = new FormData();
+                formData.append("file", file);
 
-              if (res.ok) {
-                const { url } = await res.json();
-                const textarea = textareaRef.current;
-                if (!textarea) return;
-                const cursorPos = textarea.selectionStart;
-                const before = content.slice(0, cursorPos);
-                const after = content.slice(cursorPos);
-                setContent(`${before}\n\n![image](${url})\n\n${after}`);
-              } else {
-                alert("Image upload failed 😢");
+                const res = await fetch("/api/upload-image", {
+                  method: "POST",
+                  body: formData,
+                });
+
+                if (res.ok) {
+                  const { urls } = await res.json();
+                  const textarea = textareaRef.current;
+                  if (!textarea) return;
+
+                  const cursorPos = textarea.selectionStart;
+                  const before = content.slice(0, cursorPos);
+                  const after = content.slice(cursorPos);
+
+                  const markdownImages = urls.map((url: string) => `![image](${url})`).join("\n\n");
+                  setContent(`${before}\n\n${markdownImages}\n\n${after}`);
+                } else {
+                  alert("Image upload failed 😢");
+                }
               }
 
               e.target.value = "";
