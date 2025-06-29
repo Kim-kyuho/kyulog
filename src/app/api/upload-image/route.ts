@@ -1,6 +1,7 @@
 // src/app/api/upload-image/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO_OWNER = process.env.REPO_OWNER;
@@ -8,59 +9,54 @@ const REPO_NAME = process.env.REPO_NAME;
 
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
-  const files = formData.getAll("file").filter(f => f instanceof File) as File[];
+  const file = formData.get("file") as File;
 
-  if (files.length === 0 || files.some(file => !file.type.startsWith("image/"))) {
+  if (!file || !file.type.startsWith("image/")) {
     return NextResponse.json({ error: "画像ファイルのみアップロード可能です。" }, { status: 400 });
   }
 
-  const uploadedUrls: string[] = [];
+  const buffer = Buffer.from(await file.arrayBuffer());
+  const content = buffer.toString("base64");
 
-  for (const file of files) {
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const content = buffer.toString("base64");
+  const hash = crypto.randomUUID();
+  const extension = file.name.split(".").pop() || "jpg";
+  const filename = `${hash}.${extension}`;
+  const githubPath = `public/blog-images/${filename}`;
+  const githubApiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${githubPath}`;
 
-    const hash = Buffer.from(file.name + Date.now()).toString("base64").replace(/[^a-zA-Z0-9]/g, "").slice(0, 16);
-    const extension = file.name.split(".").pop() || "jpg";
-    const filename = `${hash}.${extension}`;
-    const githubPath = `public/blog-images/${filename}`;
-    const githubApiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${githubPath}`;
+  let sha: string | undefined = undefined;
 
-    let sha: string | undefined = undefined;
+  const checkRes = await fetch(githubApiUrl, {
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  });
 
-    const checkRes = await fetch(githubApiUrl, {
-      headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (checkRes.ok) {
-      const fileInfo = await checkRes.json();
-      sha = fileInfo.sha;
-    }
-
-    const uploadRes = await fetch(githubApiUrl, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: `画像 ${filename} をアップロード`,
-        content,
-        ...(sha && { sha }),
-      }),
-    });
-
-    if (!uploadRes.ok) {
-      const error = await uploadRes.json();
-      return NextResponse.json({ error }, { status: 500 });
-    }
-
-    const imageUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${githubPath}`;
-    uploadedUrls.push(imageUrl);
+  if (checkRes.ok) {
+    const fileInfo = await checkRes.json();
+    sha = fileInfo.sha;
   }
 
-  return NextResponse.json({ urls: uploadedUrls, redirectTo: "/blog" });
+  const uploadRes = await fetch(githubApiUrl, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      message: `画像 ${filename} をアップロード`,
+      content,
+      ...(sha && { sha }),
+    }),
+  });
+
+  if (!uploadRes.ok) {
+    const error = await uploadRes.json();
+    return NextResponse.json({ error }, { status: 500 });
+  }
+
+  const imageUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${githubPath}`;
+
+  return NextResponse.json({ url: imageUrl, redirectTo: "/blog" });
 }
