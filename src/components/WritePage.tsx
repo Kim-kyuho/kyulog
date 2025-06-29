@@ -201,7 +201,8 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
                 });
 
                 if (res.ok) {
-                  const { urls } = await res.json();
+                  const { urls, url } = await res.json();
+                  const actualUrls = urls ?? (url ? [url] : []);
                   const textarea = textareaRef.current;
                   if (!textarea) return;
 
@@ -209,7 +210,7 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
                   const before = content.slice(0, cursorPos);
                   const after = content.slice(cursorPos);
 
-                  const markdownImages = urls.map((url: string) => `![image](${url})`).join("\n\n");
+                  const markdownImages = actualUrls.map((u: string) => `![image](${u})`).join("\n\n");
                   setContent(`${before}\n\n${markdownImages}\n\n${after}`);
                 } else {
                   alert("Image upload failed 😢");
