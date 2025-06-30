@@ -63,24 +63,28 @@ export default function Header() {
             <Link
               href="/about"
               className={`py-2 hover:text-sky-500 active:scale-95 transform transition block text-lg font-bold sm:text-xl ${pathname.startsWith("/about") ? "text-pink-500" : ""}`}
+              onClick={() => setMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="/projects"
               className={`py-2 hover:text-sky-500 active:scale-95 transform transition block text-lg font-bold sm:text-xl ${pathname.startsWith("/projects") ? "text-pink-500" : ""}`}
+              onClick={() => setMenuOpen(false)}
             >
               Projects
             </Link>
             <Link
               href="/blog"
               className={`py-2 hover:text-sky-500 active:scale-95 transform transition block text-lg font-bold sm:text-xl ${pathname.startsWith("/blog") ? "text-pink-500" : ""}`}
+              onClick={() => setMenuOpen(false)}
             >
               Blog
             </Link>
             <Link
               href="/contact"
               className={`py-2 hover:text-sky-500 active:scale-95 transform transition block text-lg font-bold sm:text-xl ${pathname.startsWith("/contact") ? "text-pink-500" : ""}`}
+              onClick={() => setMenuOpen(false)}
             >
               Contact
             </Link>
