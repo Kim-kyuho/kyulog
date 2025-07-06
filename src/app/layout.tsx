@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "./providers";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next"
 
 
 export const metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main className="pt-20 p-4 sm:p-8 overflow-x-hidden">{children}</main>
             <Footer />
           </div>
+          <Analytics /> {/* Vercel Analytics */}
         </Providers>
       </body>
     </html>
