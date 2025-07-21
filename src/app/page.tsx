@@ -41,7 +41,7 @@ export default async function HomePage() {
         </h2>
         <ul className="space-y-3">
           {latestPosts.map((post) => (
-            <li key={post.slug}>
+            <li key={post.id}>
               <Link
                 href={`/blog/${post.slug}`}
                 className="group block bg-white dark:bg-white/5 p-4 rounded-xl border border-white/70 dark:border-white/20 shadow transition duration-300 ease-in-out hover:bg-lime-300 dark:hover:bg-white/5 hover:shadow-lime-200 dark:hover:shadow-none active:scale-95"

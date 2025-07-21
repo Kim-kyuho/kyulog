@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const target = posts.find((p) => p.id === id);
     if (!target) return NextResponse.json({ error: "Post not found" }, { status: 404 });
 
-    const slug = target.slug;
+    const slug = target.id
     const path = `posts/${slug}.md`;
     const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
 
