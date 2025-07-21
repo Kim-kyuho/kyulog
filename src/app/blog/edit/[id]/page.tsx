@@ -1,39 +1,43 @@
 // src/app/blog/edit/[id]/page.tsx
 
 import { notFound } from "next/navigation";
+import EditClient from "./EditClient";
+import type { PostFormData } from "@/app/types/write";
+
+// 追加: DBアクセス用
 import { db } from "@/db/index";
 import { blogPosts } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-import EditClient from "./EditClient";
-import type { PostFormData } from "@/app/types/write";
+export const dynamic = "force-dynamic";
 
 interface EditPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function EditPage({ params }: EditPageProps) {
-  const id = Number(params.id);
+  const idParam = await params;
+  const id = parseInt(idParam.id, 10);
 
-  try {
-    const post = await db.query.blogPosts.findFirst({
-      where: eq(blogPosts.id, id),
-    });
+  const result = await db
+    .select()
+    .from(blogPosts)
+    .where(eq(blogPosts.id, id));
 
-    if (!post) return notFound();
+  const post = result[0];
 
-    const initialData: PostFormData = {
-      id: post.id.toString(),
-      title: post.title ?? "",
-      summary: post.summary ?? "",
-      tags: Array.isArray(post.tags) ? post.tags.join(", ") : "",
-      category: post.category ?? "",
-      content: post.content ?? "",
-    };
-
-    return <EditClient initialData={initialData} />;
-  } catch (e) {
-    console.error("Failed to load post from DB:", e);
+  if (!post) {
     return notFound();
   }
+
+  const initialData: PostFormData = {
+    id: String(post.id),
+    title: post.title || "",
+    summary: post.summary || "",
+    tags: Array.isArray(post.tags) ? post.tags.join(", ") : post.tags || "",
+    category: post.category || "",
+    content: post.content || "",
+  };
+
+  return <EditClient initialData={initialData} />;
 }

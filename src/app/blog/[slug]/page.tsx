@@ -1,11 +1,17 @@
-import { db } from "@/db/index";
-import { blogPosts } from "@/db/schema";
-import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { getAllPosts, getPostBySlug } from "@/lib/posts";
+
+// 정적 경로 생성
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
+    slug: post.id.toString(), 
+  }));
+}
 
 export default async function Page({
   params,
@@ -17,25 +23,25 @@ export default async function Page({
     params,
   ]);
 
-  const postList = await db.select().from(blogPosts).orderBy(blogPosts.date);
-  const post = postList.find(p => String(p.id) === slug);
+  const posts = await getAllPosts();
+  const currentPost = await getPostBySlug(slug);
 
-  if (!post) return notFound();
+  if (!currentPost) return notFound();
 
-  const currentIndex = postList.findIndex((p) => String(p.id) === slug);
-  const prevPost = postList[currentIndex - 1];
-  const nextPost = postList[currentIndex + 1];
-  const recentPosts = postList
-    .filter((p) => String(p.id) !== slug)
+  const currentIndex = posts.findIndex((p) => p.id === Number(slug));
+  const prevPost = posts[currentIndex - 1];
+  const nextPost = posts[currentIndex + 1];
+  const recentPosts = posts
+    .filter((p) => p.id !== Number(slug))
     .slice()
     .sort((a, b) => (a.date < b.date ? 1 : -1))
     .slice(0, 3);
 
   return (
     <article className="max-w-3xl mx-auto py-12 px-4 prose dark:prose-invert bg-white/60 dark:bg-white/10 backdrop-blur-md rounded-2xl shadow-md">
-      <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
+      <h1 className="text-3xl font-bold mb-2">{currentPost.title}</h1>
       <p className="text-sm text-muted-foreground mb-2">
-        {post.date.toLocaleDateString("ja-JP", {
+        {currentPost.date.toLocaleDateString("ja-JP", {
           year: "numeric",
           month: "2-digit",
           day: "2-digit",
@@ -43,25 +49,25 @@ export default async function Page({
         <span className="ml-4 text-xs text-muted-foreground">
           Category:
           <span className="ml-1 text-green-800 bg-green-100 px-1.5 py-0.5 rounded-full">
-            {post.category}
+            {currentPost.category}
           </span>
         </span>
       </p>
-      {post.tags && Array.isArray(post.tags) && (
+      {currentPost.tags && (
         <div className="mb-6 text-xs text-muted-foreground leading-none">
           <strong>Tag:</strong>{" "}
-          {post.tags.map((tag: string) => (
+          {currentPost.tags.split(",").map((tag) => (
             <span
               key={tag}
               className="ml-1 text-pink-700 bg-pink-100 px-1.5 py-0.5 rounded-full"
             >
-              #{tag}
+              #{tag.trim()}
             </span>
           ))}
         </div>
       )}
 
-      <MarkdownRenderer content={post.content!} /> 
+      <MarkdownRenderer content={currentPost.content!} />
 
       {session?.user?.isAdmin && (
         <div className="flex justify-end mb-4">
@@ -78,15 +84,15 @@ export default async function Page({
         {prevPost ? (
           <Link
             href={`/blog/${prevPost.id}`}
-            className="px-3 py-1 bg-sky-500 text-white font-bold rounded hover:bg-pink-500 duration-300 no-underline active:scale-95 transition-transform"
+            className="px-3 py-1 bg-sky-500 text-white font-bold rounded hover:bg-pink-500 transition duration-300 no-underline active:scale-95 transition-transform"
           >
             ← prev
           </Link>
         ) : <div />}
-        {nextPost ? (  
+        {nextPost ? (
           <Link
             href={`/blog/${nextPost.id}`}
-            className="px-3 py-1 bg-sky-500 text-white font-bold rounded hover:bg-pink-500 duration-300 no-underline active:scale-95 transition-transform"
+            className="px-3 py-1 bg-sky-500 text-white font-bold rounded hover:bg-pink-500 transition duration-300 no-underline active:scale-95 transition-transform"
           >
             next →
           </Link>
@@ -96,20 +102,26 @@ export default async function Page({
       <div className="mt-8">
         <h2 className="text-lg font-semibold mb-2">📌 Read More Posts</h2>
         <ul className="space-y-2">
-          {recentPosts.map((rp) => (
-            <li key={rp.id}>
-              <Link href={`/blog/${rp.id}`} className="text-blue-500 hover:underline active:scale-95 transition-transform inline-block">
-                {rp.title}
+          {recentPosts.map((post) => (
+            <li key={post.id}>
+              <Link
+                href={`/blog/${post.id}`}
+                className="text-blue-500 hover:underline active:scale-95 transition-transform inline-block"
+              >
+                {post.title}
               </Link>
             </li>
           ))}
         </ul>
       </div>
       <div className="mt-6 text-center">
-          <Link href="/blog" className="inline-block px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded active:scale-95 transition-transform">
-            View All Posts →
-          </Link>
-        </div>
+        <Link
+          href="/blog"
+          className="inline-block px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded active:scale-95 transition-transform"
+        >
+          View All Posts →
+        </Link>
+      </div>
     </article>
   );
 }
