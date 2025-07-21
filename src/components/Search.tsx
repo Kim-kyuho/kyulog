@@ -212,7 +212,7 @@ export default function Search() {
                 </div>
               </Link>
 
-              
+              {session?.user?.isAdmin && (
                 <button
                   className="ml-4 px-2 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600 mt-3 active:scale-95 transition-transform"
                   onClick={async () => {
@@ -234,7 +234,7 @@ export default function Search() {
                 >
                   delete
                 </button>
-              
+              )}
             </li>
           ))}
         </ul>
