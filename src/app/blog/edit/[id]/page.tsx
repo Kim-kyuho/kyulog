@@ -1,14 +1,13 @@
 // src/app/blog/edit/[id]/page.tsx
 
 import { notFound } from "next/navigation";
-import fs from "fs/promises";
-import path from "path";
-import matter from "gray-matter";
-
-// 1) 클라이언트 컴포넌트인 EditClient import
 import EditClient from "./EditClient";
-// 2) 타입 선언 import
 import type { PostFormData } from "@/app/types/write";
+
+// 追加: DBアクセス用
+import { db } from "@/db/index";
+import { blogPosts } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 export const dynamic = "force-dynamic";
 
@@ -17,27 +16,28 @@ interface EditPageProps {
 }
 
 export default async function EditPage({ params }: EditPageProps) {
-  const { id } = await params;
-  const filePath = path.join(process.cwd(), "posts", `${id}.md`);
+  const idParam = await params;
+  const id = parseInt(idParam.id, 10);
 
-  try {
-    const fileContent = await fs.readFile(filePath, "utf8");
-    const { data, content } = matter(fileContent);
+  const result = await db
+    .select()
+    .from(blogPosts)
+    .where(eq(blogPosts.id, id));
 
-    // 3) PostFormData 타입으로 initialData 구성
-    const initialData: PostFormData = {
-      id,
-      title: data.title || "",
-      summary: data.summary || "",
-      tags: Array.isArray(data.tags) ? data.tags.join(", ") : data.tags || "",
-      category: data.category || "",
-      content: content || "",
-    };
+  const post = result[0];
 
-    // 4) 클라이언트 컴포넌트에 props로 넘겨 렌더링
-    return <EditClient initialData={initialData} />;
-  } catch (e) {
-    console.error("Failed to load markdown for editing:", e);
+  if (!post) {
     return notFound();
   }
+
+  const initialData: PostFormData = {
+    id: String(post.id),
+    title: post.title || "",
+    summary: post.summary || "",
+    tags: Array.isArray(post.tags) ? post.tags.join(", ") : post.tags || "",
+    category: post.category || "",
+    content: post.content || "",
+  };
+
+  return <EditClient initialData={initialData} />;
 }

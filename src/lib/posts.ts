@@ -1,11 +1,11 @@
 // src/lib/posts.ts
 
-import fs from "fs/promises";
-import path from "path";
-import matter from "gray-matter";
+import { db } from "../db";
+import { blogPosts } from "../db/schema";
+import { eq } from "drizzle-orm";
 
 export type Post = {
-    id: string;
+    id: number;
     title: string;
     date: string;
     summary: string;
@@ -14,28 +14,13 @@ export type Post = {
     tags: string[];
   };
 
-const postsDirectory = path.join(process.cwd(), "posts");
-
 export async function getAllPosts() {
-  const filenames = await fs.readdir(postsDirectory);
+  const result = await db.select().from(blogPosts).orderBy(blogPosts.id);
+  return result;
+}
 
-  const posts = await Promise.all(
-    filenames.map(async (filename) => {
-      const filePath = path.join(postsDirectory, filename);
-      const fileContents = await fs.readFile(filePath, "utf8");
-      const { data } = matter(fileContents);
-
-      return {
-        id: data.id || "",
-        title: data.title || "Untitled", 
-        date: data.date || "Unknown date",
-        summary: data.summary || " ",
-        slug: filename.replace(/\.md$/, ""),
-        category: data.category || "etc.", 
-        tags: Array.isArray(data.tags) ? data.tags : [data.tags].filter(Boolean),
-      };
-    })
-  );
-
-  return posts;
+export async function getPostBySlug(slug: string) {
+  const id = Number(slug); // slug는 문자열이므로 number로 변환
+  const result = await db.select().from(blogPosts).where(eq(blogPosts.id, id));
+  return result[0];
 }

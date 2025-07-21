@@ -9,7 +9,7 @@ async function generate() {
   // 요약 정보만 저장 (id, slug, title, summary 등)
   const minimalPosts = posts.map((post) => ({
     id: post.id,
-    slug: post.slug,
+    slug: post.id,
     title: post.title,
     summary: post.summary,
     date: post.date,

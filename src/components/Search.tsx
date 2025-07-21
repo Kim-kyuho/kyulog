@@ -6,13 +6,12 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 type Post = {
-  id: string;
-  slug: string;
+  id: number;
   title: string;
   summary?: string;
   date: string;
   category?: string;
-  tags?: string[];
+  tags?: string; // 수정됨
 };
 
 export default function Search() {
@@ -30,9 +29,20 @@ export default function Search() {
   const tagRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("/posts.json")
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
+    const fetchPosts = async () => {
+      const res = await fetch("/api/post");
+      const data = await res.json();
+
+      const parsed = data.map((post: Post) => ({
+        ...post,
+        tags: typeof post.tags === "string"
+        ? post.tags.split(",").map((tag) => tag.trim()).filter(Boolean)
+    : [],
+      }));
+
+      setPosts(parsed);
+    };
+    fetchPosts();
   }, []);
 
   useEffect(() => {
@@ -52,7 +62,13 @@ export default function Search() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const uniqueTags = Array.from(new Set(posts.flatMap((p) => p.tags || [])));
+  const uniqueTags = Array.from(
+    new Set(
+      posts.flatMap((p) =>
+        Array.isArray(p.tags) ? p.tags : (typeof p.tags === "string" ? p.tags.split(",") : [])
+      )
+    )
+  ) ;
   const uniqueCategories = Array.from(
     new Set(posts.map((p) => p.category).filter((cat): cat is string => !!cat))
   );
@@ -61,7 +77,9 @@ export default function Search() {
     const matchesQuery =
       post.title.toLowerCase().includes(query.toLowerCase()) ||
       post.summary?.toLowerCase().includes(query.toLowerCase());
-    const matchesTag = selectedTag ? post.tags?.includes(selectedTag) : true;
+    const matchesTag = selectedTag
+      ? Array.isArray(post.tags) && post.tags.includes(selectedTag)
+      : true;
     const matchesCategory = selectedCategory ? post.category === selectedCategory : true;
     return matchesQuery && matchesTag && matchesCategory;
   });
@@ -168,9 +186,9 @@ export default function Search() {
       <div className="w-full bg-white shadow p-4 rounded-xl dark:bg-gray-800 dark:shadow-white/10">
         <ul className="space-y-4">
           {paginated.map((post) => (
-            <li key={post.slug}>
+            <li key={post.id}>
               <Link
-                href={`/blog/${post.slug}`}
+                href={`/blog/${post.id}`}
                 className="block bg-white dark:bg-white/5 p-4 rounded-xl border border-white/70 dark:border-white/20 shadow-xs duration-300 hover:bg-lime-300 dark:hover:bg-white/5 hover:shadow-lime-200 dark:hover:shadow-none active:scale-95 transition-transform"
               >
                 <div>
@@ -184,13 +202,13 @@ export default function Search() {
                     )}
                   </p>
                   <p className="text-sm text-gray-800 dark:text-gray-100 mt-2">{post.summary}</p>
-                  {post.tags && (
+                  {Array.isArray(post.tags) && post.tags.length > 0 && (
                     <div className="mt-2 flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <span key={tag} className="text-xs text-pink-700 bg-pink-100 px-2 py-1 rounded-full">#{tag}</span>
-                      ))}
-                    </div>
-                  )}
+                    {post.tags.map((tag) => (
+                    <span key={tag} className="text-xs text-pink-700 bg-pink-100 px-2 py-1 rounded-full">#{tag}</span>
+                    ))}
+  </div>
+)}
                 </div>
               </Link>
 

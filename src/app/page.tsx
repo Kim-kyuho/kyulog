@@ -41,9 +41,9 @@ export default async function HomePage() {
         </h2>
         <ul className="space-y-3">
           {latestPosts.map((post) => (
-            <li key={post.slug}>
+            <li key={post.id}>
               <Link
-                href={`/blog/${post.slug}`}
+                href={`/blog/${post.id}`}
                 className="group block bg-white dark:bg-white/5 p-4 rounded-xl border border-white/70 dark:border-white/20 shadow transition duration-300 ease-in-out hover:bg-lime-300 dark:hover:bg-white/5 hover:shadow-lime-200 dark:hover:shadow-none active:scale-95"
               >
                 <div>
@@ -51,7 +51,11 @@ export default async function HomePage() {
                     {post.title}
                   </h3>
                   <p className="text-sm text-gray-500 dark:text-gray-300 mt-1">
-                    {post.date}
+                    {post.date.toLocaleDateString("ja-JP", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })}{" "}
                     {post.category && (
                       <span className="ml-2 text-green-800 bg-green-100 px-2 py-1 rounded-full text-xs">
                         {post.category}
@@ -63,7 +67,7 @@ export default async function HomePage() {
                   </p>
                   {post.tags && (
                     <div className="mt-2 flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
+                      {(Array.isArray(post.tags) ? post.tags : post.tags.split(',')).map((tag) => (
                         <span key={tag} className="text-xs text-pink-700 bg-pink-100 px-2 py-1 rounded-full">
                           #{tag}
                         </span>
