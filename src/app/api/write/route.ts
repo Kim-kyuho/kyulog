@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
       tagsArray = [];
     }
 
-    const now = new Date();
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
 
     await db.insert(blogPosts).values({
       title,

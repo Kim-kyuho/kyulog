@@ -9,7 +9,7 @@ import { getAllPosts, getPostBySlug } from "@/lib/posts";
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts.map((post) => ({
-    slug: post.id.toString(), 
+    slug: String(post.id),
   }));
 }
 

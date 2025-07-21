@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const { id, title, summary, category, tags, content } = await req.json();
     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
 
-    const now = new Date();
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
 
     const result = await db
       .update(blogPosts)
