@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing id" }, { status: 400 });
     }
 
-    const deleted = await db.delete(blogPosts).where(eq(blogPosts.id, id));
+    await db.delete(blogPosts).where(eq(blogPosts.id, id));
 
     return NextResponse.json({ message: "Post deleted successfully." });
   } catch (err) {
