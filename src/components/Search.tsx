@@ -1,9 +1,10 @@
 // Search.tsx
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import type { PostListItem } from "@/lib/posts";
 
 type Post = {
   id: number;
@@ -11,12 +12,25 @@ type Post = {
   summary?: string;
   date: string;
   category?: string;
-  tags?: string; // 수정됨
+  tags?: string | string[];
 };
 
-export default function Search() {
+type SearchProps = {
+  initialPosts: PostListItem[];
+};
+
+export default function Search({ initialPosts }: SearchProps) {
   const { data: session } = useSession();
-  const [posts, setPosts] = useState<Post[]>([]);
+  const posts: Post[] = initialPosts.map((post) => ({
+    ...post,
+    date: new Date(post.date).toISOString(),
+    summary: post.summary ?? undefined,
+    category: post.category ?? undefined,
+    tags:
+      typeof post.tags === "string"
+        ? post.tags.split(",").map((tag) => tag.trim()).filter(Boolean)
+        : [],
+  }));
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -29,25 +43,8 @@ export default function Search() {
   const tagRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await fetch("/api/post");
-      const data = await res.json();
-
-      const parsed = data.map((post: Post) => ({
-        ...post,
-        tags: typeof post.tags === "string"
-        ? post.tags.split(",").map((tag) => tag.trim()).filter(Boolean)
-    : [],
-      }));
-
-      setPosts(parsed);
-    };
-    fetchPosts();
-  }, []);
-
-  useEffect(() => {
     setCurrentPage(1);
-  }, [query]);
+  }, [query, selectedTag, selectedCategory]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

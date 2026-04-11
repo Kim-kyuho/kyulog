@@ -1,11 +1,10 @@
 // src/app/api/post/route.ts
 import { NextResponse } from "next/server";
-import { db } from "@/db/index";
-import { blogPosts } from "@/db/schema";
+import { getPostList } from "@/lib/posts";
 
 export async function GET() {
   try {
-    const posts = await db.select().from(blogPosts);
+    const posts = await getPostList();
     return NextResponse.json(posts);
   } catch (err) {
     console.error("DB fetch error:", err);

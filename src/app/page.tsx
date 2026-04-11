@@ -1,13 +1,11 @@
 // src/app/page.tsx
 import Link from "next/link";
-import { getAllPosts } from "@/lib/posts";
+import { getRecentPostList } from "@/lib/posts";
+
+export const revalidate = 60;
 
 export default async function HomePage() {
-  const posts = await getAllPosts();
-  const latestPosts = posts
-    .slice()
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
-    .slice(0, 3);
+  const latestPosts = await getRecentPostList(3);
 
   return (
     <section className="max-w-3xl mx-auto px-4 py-8">

@@ -2,25 +2,48 @@
 
 import { db } from "../db";
 import { blogPosts } from "../db/schema";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
-export type Post = {
-    id: number;
-    title: string;
-    date: string;
-    summary: string;
-    slug: string;
-    category: string;
-    tags: string[];
-  };
+export type PostListItem = {
+  id: number;
+  title: string;
+  date: Date;
+  category: string | null;
+  tags: string | null;
+  summary: string | null;
+};
 
-export async function getAllPosts() {
-  const result = await db.select().from(blogPosts).orderBy(blogPosts.id);
-  return result;
+export async function getPostList() {
+  return db
+    .select({
+      id: blogPosts.id,
+      title: blogPosts.title,
+      date: blogPosts.date,
+      category: blogPosts.category,
+      tags: blogPosts.tags,
+      summary: blogPosts.summary,
+    })
+    .from(blogPosts)
+    .orderBy(desc(blogPosts.date), desc(blogPosts.id));
+}
+
+export async function getRecentPostList(limit = 3) {
+  return db
+    .select({
+      id: blogPosts.id,
+      title: blogPosts.title,
+      date: blogPosts.date,
+      category: blogPosts.category,
+      tags: blogPosts.tags,
+      summary: blogPosts.summary,
+    })
+    .from(blogPosts)
+    .orderBy(desc(blogPosts.date), desc(blogPosts.id))
+    .limit(limit);
 }
 
 export async function getPostBySlug(slug: string) {
-  const id = Number(slug); // slug는 문자열이므로 number로 변환
+  const id = Number(slug);
   const result = await db.select().from(blogPosts).where(eq(blogPosts.id, id));
   return result[0];
 }

@@ -3,11 +3,11 @@ import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { getAllPosts, getPostBySlug } from "@/lib/posts";
+import { getPostBySlug, getPostList } from "@/lib/posts";
 
 // 정적 경로 생성
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts = await getPostList();
   return posts.map((post) => ({
     slug: String(post.id),
   }));
@@ -23,19 +23,18 @@ export default async function Page({
     params,
   ]);
 
-  const posts = await getAllPosts();
-  const currentPost = await getPostBySlug(slug);
+  const [currentPost, posts] = await Promise.all([
+    getPostBySlug(slug),
+    getPostList(),
+  ]);
 
   if (!currentPost) return notFound();
 
-  const currentIndex = posts.findIndex((p) => p.id === Number(slug));
-  const prevPost = posts[currentIndex - 1];
-  const nextPost = posts[currentIndex + 1];
-  const recentPosts = posts
-    .filter((p) => p.id !== Number(slug))
-    .slice()
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
-    .slice(0, 3);
+  const currentId = Number(slug);
+  const currentIndex = posts.findIndex((p) => p.id === currentId);
+  const prevPost = currentIndex >= 0 ? posts[currentIndex + 1] : undefined;
+  const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
+  const recentPosts = posts.filter((p) => p.id !== currentId).slice(0, 3);
 
   return (
     <article className="max-w-3xl mx-auto py-12 px-4 prose dark:prose-invert bg-white/60 dark:bg-white/10 backdrop-blur-md rounded-2xl shadow-md">
