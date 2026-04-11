@@ -1,10 +1,10 @@
 // scripts/generate-posts-json.ts
 import fs from "fs";
 import path from "path";
-import { getAllPosts } from "../src/lib/posts";
+import { getPostList } from "../src/lib/posts";
 
 async function generate() {
-  const posts = await getAllPosts();
+  const posts = await getPostList();
 
   // 요약 정보만 저장 (id, slug, title, summary 등)
   const minimalPosts = posts.map((post) => ({
