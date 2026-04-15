@@ -2,17 +2,33 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { getAdminSession } from "@/lib/admin";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO_OWNER = process.env.REPO_OWNER;
 const REPO_NAME = process.env.REPO_NAME;
+const MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024;
 
 export async function POST(req: NextRequest) {
-  const formData = await req.formData();
-  const file = formData.get("file") as File;
+  const session = await getAdminSession();
 
-  if (!file || !file.type.startsWith("image/")) {
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!GITHUB_TOKEN || !REPO_OWNER || !REPO_NAME) {
+    return NextResponse.json({ error: "Missing GitHub upload configuration." }, { status: 500 });
+  }
+
+  const formData = await req.formData();
+  const file = formData.get("file");
+
+  if (!(file instanceof File) || !file.type.startsWith("image/")) {
     return NextResponse.json({ error: "画像ファイルのみアップロード可能です。" }, { status: 400 });
+  }
+
+  if (file.size > MAX_IMAGE_SIZE_BYTES) {
+    return NextResponse.json({ error: "画像サイズは5MB以下にしてください。" }, { status: 400 });
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());

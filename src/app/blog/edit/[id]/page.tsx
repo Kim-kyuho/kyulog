@@ -1,8 +1,9 @@
 // src/app/blog/edit/[id]/page.tsx
 
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import EditClient from "./EditClient";
 import type { PostFormData } from "@/app/types/write";
+import { getAdminSession } from "@/lib/admin";
 
 // 追加: DBアクセス用
 import { db } from "@/db/index";
@@ -16,6 +17,12 @@ interface EditPageProps {
 }
 
 export default async function EditPage({ params }: EditPageProps) {
+  const session = await getAdminSession();
+
+  if (!session) {
+    redirect("/blog");
+  }
+
   const idParam = await params;
   const id = parseInt(idParam.id, 10);
 

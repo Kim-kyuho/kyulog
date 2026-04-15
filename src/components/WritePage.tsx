@@ -69,10 +69,10 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
       if (res.ok) {
         if (isEditMode) {
           setSuccessMessage("✅ 更新成功！");
-          window.location.href = "https://kyulog.vercel.app/blog/";
+          window.location.href = "/blog";
         } else {
           setSuccessMessage("✅ アップロード成功！");
-          window.location.href = "https://kyulog.vercel.app/blog/";
+          window.location.href = "/blog";
         }
         setTitle("");
         setSummary("");

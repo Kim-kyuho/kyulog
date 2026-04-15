@@ -5,13 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getPostBySlug, getPostList } from "@/lib/posts";
 
-// 정적 경로 생성
-export async function generateStaticParams() {
-  const posts = await getPostList();
-  return posts.map((post) => ({
-    slug: String(post.id),
-  }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function Page({
   params,

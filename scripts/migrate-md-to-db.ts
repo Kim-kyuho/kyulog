@@ -12,7 +12,7 @@ async function migrateMarkdownToDB() {
   const files = await fs.readdir(postsDir);
 
   /*
-  for (const file of files) {
+    for (const _file of files) {
     if (path.extname(file) !== '.md') continue;
 
     const filePath = path.join(postsDir, file);
@@ -47,7 +47,7 @@ async function migrateMarkdownToDB() {
       const filePath = path.join(postsDir, file);
       const fileContent = await fs.readFile(filePath, 'utf-8');
       const { data, content } = matter(fileContent);
-      return { file, data, content };
+      return { data, content };
     });
 
   const resolvedPosts = await Promise.all(mdFiles);
@@ -57,7 +57,7 @@ async function migrateMarkdownToDB() {
     .filter(({ data }) => data.title && data.date)
     .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
 
-  for (const { file, data, content } of sortedPosts) {
+  for (const { data, content } of sortedPosts) {
     try {
       await db.insert(blogPosts).values({
         title: data.title,

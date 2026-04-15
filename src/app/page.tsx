@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { getRecentPostList } from "@/lib/posts";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const latestPosts = await getRecentPostList(3);

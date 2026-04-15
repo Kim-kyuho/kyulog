@@ -1,12 +1,18 @@
 export const dynamic = "force-dynamic";
-// src/app/api/write/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { blogPosts } from "@/db/schema";
+import { getAdminSession } from "@/lib/admin";
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await getAdminSession();
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { title, summary, content, category, tags } = await req.json();
 
     if (!title || !summary || !content) {
@@ -30,10 +36,10 @@ export async function POST(req: NextRequest) {
     const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
 
     await db.insert(blogPosts).values({
-      title,
-      summary,
+      title: title.trim(),
+      summary: summary.trim(),
       content,
-      category: typeof category === "string" ? category : "",
+      category: typeof category === "string" ? category.trim() : "",
       tags: tagsArray.join(","),
       date: now,
       updateDate: now,

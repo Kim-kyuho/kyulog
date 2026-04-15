@@ -3,10 +3,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db/index";
 import { blogPosts } from "@/db/schema";
+import { getAdminSession } from "@/lib/admin";
 import { eq } from "drizzle-orm";
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await getAdminSession();
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await req.json();
     if (!id) {
       return NextResponse.json({ error: "Missing id" }, { status: 400 });
