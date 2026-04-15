@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" ss:Size="11"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="Header">
+   <Font ss:Bold="1"/>
+   <Interior ss:Color="#D9EAF7" ss:Pattern="Solid"/>
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+  </Style>
+  <Style ss:ID="Wrap">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+  </Style>
+ </Styles>
+
+ <Worksheet ss:Name="Overview">
+  <Table>
+   <Column ss:Width="140"/>
+   <Column ss:Width="520"/>
+   <Row>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">항목</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">내용</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">시스템명</Data></Cell>
+    <Cell ss:StyleID="Wrap"><Data ss:Type="String">kyu.log / 규로그</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">시스템 개요</Data></Cell>
+    <Cell ss:StyleID="Wrap"><Data ss:Type="String">개인 포트폴리오와 기술 블로그를 제공하는 Next.js 기반 웹 애플리케이션. 프로젝트 소개, 블로그 조회, 관리자용 글 작성/수정/삭제, GitHub OAuth 로그인, GitHub 저장소 기반 이미지 업로드 기능을 포함한다.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">주요 사용자</Data></Cell>
+    <Cell ss:StyleID="Wrap"><Data ss:Type="String">일반 방문자, 관리자</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">프론트엔드</Data></Cell>
+    <Cell><Data ss:Type="String">Next.js App Router, React, Tailwind CSS</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">백엔드</Data></Cell>
+    <Cell><Data ss:Type="String">Next.js Route Handler</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">인증</Data></Cell>
+    <Cell ss:StyleID="Wrap"><Data ss:Type="String">NextAuth + GitHub OAuth. GitHub login이 Kim-kyuho인 경우 관리자 권한 부여.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">데이터 저장소</Data></Cell>
+    <Cell ss:StyleID="Wrap"><Data ss:Type="String">Neon PostgreSQL + Drizzle ORM. 블로그 글은 blog_posts 테이블에 저장.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">정적 데이터</Data></Cell>
+    <Cell ss:StyleID="Wrap"><Data ss:Type="String">프로젝트 상세는 src/data/projects.json 기반 정적 렌더링.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">외부 연동</Data></Cell>
+    <Cell ss:StyleID="Wrap"><Data ss:Type="String">GitHub OAuth, GitHub Contents API(이미지 업로드)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">공통 네비게이션</Data></Cell>
+    <Cell><Data ss:Type="String">Home, About, Projects, Blog, Contact, 로그인 상태 표시</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">권한 정책</Data></Cell>
+    <Cell ss:StyleID="Wrap"><Data ss:Type="String">비로그인 또는 비관리자는 블로그 쓰기/수정 페이지 접근 불가. 관리자 전용 API(write/update/delete/upload-image)는 401 Unauthorized 반환.</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+
+ <Worksheet ss:Name="ScreenList">
+  <Table>
+   <Column ss:Width="120"/>
+   <Column ss:Width="180"/>
+   <Column ss:Width="120"/>
+   <Column ss:Width="150"/>
+   <Column ss:Width="350"/>
+   <Row>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">화면ID</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">경로</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">접근권한</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">렌더링 방식</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">설명</Data></Cell>
+   </Row>
+   <Row><Cell><Data ss:Type="String">SCR-HOME</Data></Cell><Cell><Data ss:Type="String">/</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell><Data ss:Type="String">동적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">소개 문구, 프로젝트 이동 버튼, 최신 블로그 3건 표시</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-ABOUT</Data></Cell><Cell><Data ss:Type="String">/about</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell><Data ss:Type="String">정적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">자기소개, 보유 자격, 기술 스택 표시</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-PROJECTS</Data></Cell><Cell><Data ss:Type="String">/projects</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell><Data ss:Type="String">정적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">프로젝트 슬라이더 목록 표시</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-PROJECT-DETAIL</Data></Cell><Cell><Data ss:Type="String">/projects/[slug]</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell><Data ss:Type="String">정적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">projects.json 기반 프로젝트 상세 페이지</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-LIST</Data></Cell><Cell><Data ss:Type="String">/blog</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell><Data ss:Type="String">동적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">검색, 태그/카테고리 필터, 페이지네이션, 관리자 전용 삭제/새 글 버튼</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-DETAIL</Data></Cell><Cell><Data ss:Type="String">/blog/[slug]</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell><Data ss:Type="String">동적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">블로그 본문 마크다운 표시, 이전/다음 글, 관련 글, 관리자 전용 수정 버튼</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-WRITE</Data></Cell><Cell><Data ss:Type="String">/blog/write</Data></Cell><Cell><Data ss:Type="String">관리자</Data></Cell><Cell><Data ss:Type="String">동적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">새 글 작성 화면. 비관리자는 /blog로 리다이렉트</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-EDIT</Data></Cell><Cell><Data ss:Type="String">/blog/edit/[id]</Data></Cell><Cell><Data ss:Type="String">관리자</Data></Cell><Cell><Data ss:Type="String">동적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">기존 글 수정 화면. 초기값 로드 후 편집</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-CONTACT</Data></Cell><Cell><Data ss:Type="String">/contact</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell><Data ss:Type="String">정적</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">이메일, GitHub, LinkedIn 링크 제공</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-AUTH</Data></Cell><Cell><Data ss:Type="String">/api/auth/[...nextauth]</Data></Cell><Cell><Data ss:Type="String">시스템</Data></Cell><Cell><Data ss:Type="String">API</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">NextAuth 인증 처리 엔드포인트</Data></Cell></Row>
+  </Table>
+ </Worksheet>
+
+ <Worksheet ss:Name="ScreenDetails">
+  <Table>
+   <Column ss:Width="120"/>
+   <Column ss:Width="150"/>
+   <Column ss:Width="260"/>
+   <Column ss:Width="240"/>
+   <Column ss:Width="280"/>
+   <Row>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">화면ID</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">영역</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">주요 항목</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">이벤트/동작</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">비고</Data></Cell>
+   </Row>
+   <Row><Cell><Data ss:Type="String">SCR-HOME</Data></Cell><Cell><Data ss:Type="String">소개 카드</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">인사말, 자기소개, Projects 이동 버튼</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">버튼 클릭 시 /projects 이동</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">최신 글은 DB에서 최근 3건 조회</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-LIST</Data></Cell><Cell><Data ss:Type="String">검색/필터</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">검색어, 카테고리 드롭다운, 태그 드롭다운</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">검색 버튼 클릭 시 query 반영, 필터 변경 시 1페이지로 이동</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">클라이언트에서 목록 필터링 수행</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-LIST</Data></Cell><Cell><Data ss:Type="String">목록 영역</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">제목, 작성일, 카테고리, 요약, 태그</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">카드 클릭 시 상세 페이지 이동</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">관리자에게만 delete 버튼 표시</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-LIST</Data></Cell><Cell><Data ss:Type="String">관리자 기능</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">Delete 버튼, New Post 버튼</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">Delete 확인 후 /api/delete 호출, New Post 클릭 시 /blog/write 이동</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">관리자 세션일 때만 노출</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-DETAIL</Data></Cell><Cell><Data ss:Type="String">본문</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">제목, 작성일, 카테고리, 태그, 마크다운 본문</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">마크다운 렌더링, 코드 하이라이트 적용</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">관리자는 Edit 버튼 이용 가능</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-DETAIL</Data></Cell><Cell><Data ss:Type="String">이전/다음 글</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">prev, next 링크, 추가 읽기 목록</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">현재 글 ID 기준으로 목록 내 이전/다음 글 계산</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">추가 읽기는 현재 글 제외 후 3건</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-WRITE</Data></Cell><Cell><Data ss:Type="String">입력 폼</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">제목, 요약, 태그, 카테고리, 본문</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">필수값 누락 시 에러 메시지 표시</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">POST /api/write 호출</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-WRITE</Data></Cell><Cell><Data ss:Type="String">이미지 업로드</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">드래그앤드롭 영역, 파일 선택 input</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">업로드 성공 시 Markdown 이미지 링크를 본문 커서 위치에 삽입</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">POST /api/upload-image 호출</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-BLOG-EDIT</Data></Cell><Cell><Data ss:Type="String">수정 폼</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">Write 화면과 동일, 초기 데이터 바인딩</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">POST /api/update 호출 후 /blog 이동</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">path parameter id로 DB 조회</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-HEADER</Data></Cell><Cell><Data ss:Type="String">공통 헤더</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">로고, 메뉴, 로그인 상태, 모바일 햄버거 메뉴</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">현재 경로 active 표시, 모바일 메뉴 토글</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">AuthStatus는 CSR 동적 import</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">SCR-CONTACT</Data></Cell><Cell><Data ss:Type="String">연락처 영역</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">Email, GitHub, LinkedIn 링크</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">외부 링크 새 창 열기</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">LinkedIn URL은 placeholder 성격으로 보임</Data></Cell></Row>
+  </Table>
+ </Worksheet>
+
+ <Worksheet ss:Name="API">
+  <Table>
+   <Column ss:Width="80"/>
+   <Column ss:Width="180"/>
+   <Column ss:Width="110"/>
+   <Column ss:Width="150"/>
+   <Column ss:Width="240"/>
+   <Column ss:Width="240"/>
+   <Column ss:Width="220"/>
+   <Row>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">API ID</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">경로</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Method</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">권한</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">요청</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">응답</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">설명</Data></Cell>
+   </Row>
+   <Row><Cell><Data ss:Type="String">API-001</Data></Cell><Cell><Data ss:Type="String">/api/post</Data></Cell><Cell><Data ss:Type="String">GET</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">없음</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">[{ id, title, date, category, tags, summary }]</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">블로그 목록 조회</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">API-002</Data></Cell><Cell><Data ss:Type="String">/api/write</Data></Cell><Cell><Data ss:Type="String">POST</Data></Cell><Cell><Data ss:Type="String">관리자</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">{ title, summary, content, category, tags }</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">201 { message: "Success" } / 400 / 401 / 500</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">새 글 등록. title/summary/content 필수</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">API-003</Data></Cell><Cell><Data ss:Type="String">/api/update</Data></Cell><Cell><Data ss:Type="String">POST</Data></Cell><Cell><Data ss:Type="String">관리자</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">{ id, title, summary, category, tags, content }</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">200 { message } / 400 / 401 / 404 / 500</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">기존 글 수정</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">API-004</Data></Cell><Cell><Data ss:Type="String">/api/delete</Data></Cell><Cell><Data ss:Type="String">POST</Data></Cell><Cell><Data ss:Type="String">관리자</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">{ id }</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">200 { message } / 400 / 401 / 500</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">글 삭제</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">API-005</Data></Cell><Cell><Data ss:Type="String">/api/upload-image</Data></Cell><Cell><Data ss:Type="String">POST</Data></Cell><Cell><Data ss:Type="String">관리자</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">multipart/form-data file=image/*, max 5MB</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">200 { url, redirectTo } / 400 / 401 / 500</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">GitHub Contents API를 사용해 public/blog-images에 업로드</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">API-006</Data></Cell><Cell><Data ss:Type="String">/api/auth/[...nextauth]</Data></Cell><Cell><Data ss:Type="String">GET, POST</Data></Cell><Cell><Data ss:Type="String">전체</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">NextAuth 내부 처리</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">세션, 로그인/로그아웃 리다이렉트</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">GitHub OAuth 인증 엔드포인트</Data></Cell></Row>
+  </Table>
+ </Worksheet>
+
+ <Worksheet ss:Name="DB">
+  <Table>
+   <Column ss:Width="140"/>
+   <Column ss:Width="120"/>
+   <Column ss:Width="160"/>
+   <Column ss:Width="100"/>
+   <Column ss:Width="120"/>
+   <Column ss:Width="260"/>
+   <Row>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">테이블</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">컬럼</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">타입</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">PK</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">NULL 허용</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">설명</Data></Cell>
+   </Row>
+   <Row><Cell><Data ss:Type="String">blog_posts</Data></Cell><Cell><Data ss:Type="String">id</Data></Cell><Cell><Data ss:Type="String">serial</Data></Cell><Cell><Data ss:Type="String">Y</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">게시글 식별자</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">blog_posts</Data></Cell><Cell><Data ss:Type="String">title</Data></Cell><Cell><Data ss:Type="String">varchar(255)</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">게시글 제목</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">blog_posts</Data></Cell><Cell><Data ss:Type="String">date</Data></Cell><Cell><Data ss:Type="String">timestamp</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">작성일시</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">blog_posts</Data></Cell><Cell><Data ss:Type="String">update_date</Data></Cell><Cell><Data ss:Type="String">timestamp</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">Y</Data></Cell><Cell><Data ss:Type="String">수정일시. 기본값 현재시각</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">blog_posts</Data></Cell><Cell><Data ss:Type="String">category</Data></Cell><Cell><Data ss:Type="String">varchar(100)</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">Y</Data></Cell><Cell><Data ss:Type="String">카테고리</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">blog_posts</Data></Cell><Cell><Data ss:Type="String">tags</Data></Cell><Cell><Data ss:Type="String">text</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">Y</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">콤마 구분 문자열 형태로 저장</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">blog_posts</Data></Cell><Cell><Data ss:Type="String">summary</Data></Cell><Cell><Data ss:Type="String">text</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">Y</Data></Cell><Cell><Data ss:Type="String">요약</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">blog_posts</Data></Cell><Cell><Data ss:Type="String">content</Data></Cell><Cell><Data ss:Type="String">text</Data></Cell><Cell><Data ss:Type="String">N</Data></Cell><Cell><Data ss:Type="String">Y</Data></Cell><Cell><Data ss:Type="String">Markdown 본문</Data></Cell></Row>
+  </Table>
+ </Worksheet>
+
+ <Worksheet ss:Name="Auth">
+  <Table>
+   <Column ss:Width="180"/>
+   <Column ss:Width="520"/>
+   <Row>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">항목</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">내용</Data></Cell>
+   </Row>
+   <Row><Cell><Data ss:Type="String">인증 방식</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">NextAuth GitHubProvider 사용</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">필요 환경변수</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">GITHUB_ID, GITHUB_SECRET, NEXTAUTH_SECRET, DATABASE_URL, GITHUB_TOKEN, REPO_OWNER, REPO_NAME</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">세션 확장값</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">session.user.login, session.user.isAdmin</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">관리자 판정</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">GitHub 로그인 ID가 Kim-kyuho일 경우 token.isAdmin = true</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">비로그인 시 UI</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">헤더에서 Sign in 버튼 표시</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">로그인 시 UI</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">Hi, {login or name}, Admin/Viewer 표시, Logout 버튼 표시</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">관리자 페이지 접근</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">/blog/write, /blog/edit/[id] 진입 시 getAdminSession 검사. 실패 시 /blog 리다이렉트</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">관리자 API 접근</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">/api/write, /api/update, /api/delete, /api/upload-image 에서 getAdminSession 검사. 실패 시 401 반환</Data></Cell></Row>
+   <Row><Cell><Data ss:Type="String">노출 제어</Data></Cell><Cell ss:StyleID="Wrap"><Data ss:Type="String">블로그 목록의 delete / new post, 상세의 edit 버튼은 관리자 세션일 때만 표시</Data></Cell></Row>
+  </Table>
+ </Worksheet>
+ <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"><Selected/></WorksheetOptions>
+</Workbook>
