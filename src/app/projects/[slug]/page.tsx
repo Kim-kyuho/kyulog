@@ -22,14 +22,14 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         alt={project.title}
         width={800}
         height={400}
-        className="mb-6 rounded shadow"
+        className="mb-6 rounded-sm shadow-sm"
       />
       <p className="text-lg mb-4 text-gray-800 dark:text-gray-100 whitespace-pre-line">{project.details}</p>
       <div className="flex flex-wrap gap-2 text-sm text-gray-600 dark:text-gray-300">
         {project.techStack?.map((tech) => (
           <span
             key={tech}
-            className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 border"
+            className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700"
           >
             {tech}
           </span>

@@ -13,7 +13,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="px-6 py-4 shadow-md bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-700">
+    <header className="px-6 py-4 shadow-md bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">
           <Link

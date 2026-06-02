@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getPostBySlug, getPostList } from "@/lib/posts";
+import { BLOG_ARTICLE_CLASS_NAME } from "@/lib/blogStyles";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +32,7 @@ export default async function Page({
   const recentPosts = posts.filter((p) => p.id !== currentId).slice(0, 3);
 
   return (
-    <article className="max-w-3xl mx-auto py-12 px-4 prose dark:prose-invert bg-white/60 dark:bg-white/10 backdrop-blur-md rounded-2xl shadow-md">
+    <article className={BLOG_ARTICLE_CLASS_NAME}>
       <h1 className="text-3xl font-bold mb-2">{currentPost.title}</h1>
       <p className="text-sm text-muted-foreground mb-2">
         {currentPost.date.toLocaleDateString("ja-JP", {
@@ -66,18 +67,18 @@ export default async function Page({
         <div className="flex justify-end mb-4">
           <Link
             href={`/blog/edit/${slug}`}
-            className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-sm active:scale-95 transition-transform"
+            className="px-3 py-1 bg-yellow-500 text-white rounded-sm hover:bg-yellow-600 text-sm active:scale-95 transition-transform"
           >
             Edit
           </Link>
         </div>
       )}
 
-      <div className="flex justify-between font-bold drop-shadow mt-8">
+      <div className="flex justify-between font-bold drop-shadow-sm mt-8">
         {prevPost ? (
           <Link
             href={`/blog/${prevPost.id}`}
-            className="px-3 py-1 bg-sky-500 text-white font-bold rounded hover:bg-pink-500 transition duration-300 no-underline active:scale-95 transition-transform"
+            className="px-3 py-1 bg-sky-500 text-white font-bold rounded-sm hover:bg-pink-500 transition duration-300 no-underline active:scale-95 transition-transform"
           >
             ← prev
           </Link>
@@ -85,7 +86,7 @@ export default async function Page({
         {nextPost ? (
           <Link
             href={`/blog/${nextPost.id}`}
-            className="px-3 py-1 bg-sky-500 text-white font-bold rounded hover:bg-pink-500 transition duration-300 no-underline active:scale-95 transition-transform"
+            className="px-3 py-1 bg-sky-500 text-white font-bold rounded-sm hover:bg-pink-500 transition duration-300 no-underline active:scale-95 transition-transform"
           >
             next →
           </Link>
@@ -110,7 +111,7 @@ export default async function Page({
       <div className="mt-6 text-center">
         <Link
           href="/blog"
-          className="inline-block px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded active:scale-95 transition-transform"
+          className="inline-block px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-sm active:scale-95 transition-transform"
         >
           View All Posts →
         </Link>

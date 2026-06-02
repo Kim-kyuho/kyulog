@@ -88,7 +88,7 @@ export default function Search({ initialPosts }: SearchProps) {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-6xl mx-auto px-4 sm:px-2 py-2">
-      <div className="w-full bg-white shadow p-4 rounded-xl dark:bg-gray-800 dark:shadow-white/10">
+      <div className="w-full bg-white shadow-sm p-4 rounded-xl dark:bg-gray-800 dark:shadow-white/10">
         {/* Search Input */}
         <div className="space-y-1 mb-6">
           <div className="relative mb-4">
@@ -117,12 +117,12 @@ export default function Search({ initialPosts }: SearchProps) {
                 <button
                   type="button"
                   onClick={() => setShowCategories(!showCategories)}
-                  className="inline-flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2 py-1.5 text-sm font-semibold text-green-900 shadow-sm ring-1 ring-green-300 hover:bg-green-50 dark:hover:bg-white active:scale-95 transition-transform"
+                  className="inline-flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2 py-1.5 text-sm font-semibold text-green-900 shadow-xs ring-1 ring-green-300 hover:bg-green-50 dark:hover:bg-white active:scale-95 transition-transform"
                 >
                   {selectedCategory || "Category"} ▼
                 </button>
                 {showCategories && (
-                  <div className="absolute z-10 mt-1 w-44 rounded-md bg-white ring-1 ring-gray-300 focus:outline-none">
+                  <div className="absolute z-10 mt-1 w-44 rounded-md bg-white ring-1 ring-gray-300 focus:outline-hidden">
                     <div className="py-1 max-h-40 overflow-y-auto">
                       <button
                         onClick={() => { setSelectedCategory(null); setShowCategories(false); }}
@@ -150,12 +150,12 @@ export default function Search({ initialPosts }: SearchProps) {
                 <button
                   type="button"
                   onClick={() => setShowTags(!showTags)}
-                  className="inline-flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2 py-1.5 text-sm font-semibold text-red-900 shadow-sm ring-1 ring-pink-300 hover:bg-pink-50 dark:hover:bg-white active:scale-95 transition-transform"
+                  className="inline-flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2 py-1.5 text-sm font-semibold text-red-900 shadow-xs ring-1 ring-pink-300 hover:bg-pink-50 dark:hover:bg-white active:scale-95 transition-transform"
                 >
                   {selectedTag || "Tag"} ▼
                 </button>
                 {showTags && (
-                  <div className="absolute z-10 mt-1 w-44 rounded-md bg-white ring-1 ring-gray-300 focus:outline-none">
+                  <div className="absolute z-10 mt-1 w-44 rounded-md bg-white ring-1 ring-gray-300 focus:outline-hidden">
                     <div className="py-1 max-h-40 overflow-y-auto">
                       <button
                         onClick={() => { setSelectedTag(null); setShowTags(false); }}
@@ -180,7 +180,7 @@ export default function Search({ initialPosts }: SearchProps) {
       </div>
 
       {/* Post list */}
-      <div className="w-full bg-white shadow p-4 rounded-xl dark:bg-gray-800 dark:shadow-white/10">
+      <div className="w-full bg-white shadow-sm p-4 rounded-xl dark:bg-gray-800 dark:shadow-white/10">
         <ul className="space-y-4">
           {paginated.map((post) => (
             <li key={post.id}>
@@ -211,7 +211,7 @@ export default function Search({ initialPosts }: SearchProps) {
 
               {session?.user?.isAdmin && (
                 <button
-                  className="ml-4 px-2 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600 mt-3 active:scale-95 transition-transform"
+                  className="ml-4 px-2 py-1 bg-red-500 text-white text-xs rounded-sm hover:bg-red-600 mt-3 active:scale-95 transition-transform"
                   onClick={async () => {
                     const confirmed = confirm(`Are you sure you want to delete "${post.title}"?`);
                     if (!confirmed) return;
@@ -241,7 +241,7 @@ export default function Search({ initialPosts }: SearchProps) {
           {session?.user?.isAdmin && (
             <Link
               href="/blog/write"
-              className="inline-block bg-blue-200 text-blue-900 font-medium px-4 py-2 rounded hover:bg-blue-300 transition"
+              className="inline-block bg-blue-200 text-blue-900 font-medium px-4 py-2 rounded-sm hover:bg-blue-300 transition"
             >
               New Post
             </Link>

@@ -26,7 +26,7 @@ export default async function HomePage() {
         </p>
         <Link
           href="/projects"
-          className="inline-block mt-4 px-6 py-2 bg-pink-200 text-pink-950 rounded hover:bg-pink-400 active:scale-95 transition"
+          className="inline-block mt-4 px-6 py-2 bg-pink-200 text-pink-950 rounded-sm hover:bg-pink-400 active:scale-95 transition"
         >
           View Projects →
         </Link>
@@ -34,7 +34,7 @@ export default async function HomePage() {
 
       {/* Latest Posts Section */}
       <div className="bg-white shadow-xl dark:bg-gray-800 rounded-xl p-6">
-        <h2 className="text-2xl font-semibold mb-4 text-shadow-indigo-900 dark:text-gray-100">
+        <h2 className="text-2xl font-semibold mb-4 dark:text-gray-100">
           📝 最新の投稿
         </h2>
         <ul className="space-y-3">
@@ -42,7 +42,7 @@ export default async function HomePage() {
             <li key={post.id}>
               <Link
                 href={`/blog/${post.id}`}
-                className="group block bg-white dark:bg-white/5 p-4 rounded-xl border border-white/70 dark:border-white/20 shadow transition duration-300 ease-in-out hover:bg-lime-300 dark:hover:bg-white/5 hover:shadow-lime-200 dark:hover:shadow-none active:scale-95"
+                className="group block bg-white dark:bg-white/5 p-4 rounded-xl border border-white/70 dark:border-white/20 shadow-sm transition duration-300 ease-in-out hover:bg-lime-300 dark:hover:bg-white/5 hover:shadow-lime-200 dark:hover:shadow-none active:scale-95"
               >
                 <div>
                   <h3 className="text-lg font-semibold text-blue-900 dark:text-white">
@@ -80,7 +80,7 @@ export default async function HomePage() {
 
         <Link
           href="/blog"
-          className="mt-6 inline-block px-5 py-2 bg-pink-200 text-pink-950 font-semibold rounded hover:bg-pink-300 active:scale-95 transition"
+          className="mt-6 inline-block px-5 py-2 bg-pink-200 text-pink-950 font-semibold rounded-sm hover:bg-pink-300 active:scale-95 transition"
         >
           View All Posts →
         </Link>

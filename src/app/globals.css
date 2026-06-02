@@ -1,11 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap');
-/* src/app/globals.css */
-@config "../../tailwind.config.js";
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "LINE Seed";
+  src: url("/fonts/LINESeedSans_W_Rg.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F;
+}
+
+@font-face {
+  font-family: "LINE Seed";
+  src: url("/fonts/LINESeedSans_W_Bd.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F;
+}
+
+@font-face {
+  font-family: "LINE Seed";
+  src: url("/fonts/LINESeedKR-Rg.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF;
+}
+
+@font-face {
+  font-family: "LINE Seed";
+  src: url("/fonts/LINESeedKR-Bd.woff2") format("woff2");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF;
+}
+
+@font-face {
+  font-family: "LINE Seed";
+  src: url("/fonts/LINESeedJP_OTF_Rg.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+3040-309F, U+30A0-30FF, U+31F0-31FF, U+3000-303F, U+4E00-9FFF, U+FF00-FFEF;
+}
+
+@font-face {
+  font-family: "LINE Seed";
+  src: url("/fonts/LINESeedJP_OTF_Bd.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+3040-309F, U+30A0-30FF, U+31F0-31FF, U+3000-303F, U+4E00-9FFF, U+FF00-FFEF;
+}
+
+@theme {
+  --color-muted-foreground: #6b7280;
+  --color-pastel-blue: #a7d3f2;
+  --color-pastel-pink: #f9c5d1;
+  --color-pastel-green: #b7e4c7;
+  --color-pastel-yellow: #fce38a;
+  --color-pastel-purple: #cdb4db;
+  --color-pastel-gray: #f8f9fa;
+  --font-sans: var(--font-line-seed);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
 
 :root {
   --background: #f4f4f4ed;
   --foreground: #171717;
+  --font-line-seed: "LINE Seed", "Apple SD Gothic Neo", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,12 +102,41 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+  font-family: var(--font-line-seed);
 }
 
-/* MarkdownRenderer에서 rehype-highlight와 prose가 겹치는 부분 해결 */
+.prose {
+  --tw-prose-code: #e11d48;
+  --tw-prose-pre-code: #f9fafb;
+  --tw-prose-pre-bg: #1f2937;
+}
+
 .prose code {
-  background-color: transparent;
-  color: inherit;
+  background-color: #f3f4f6;
+  border-radius: 0.25rem;
+  padding: 0.2em 0.4em;
+  font-weight: 500;
   font-size: 0.9em;
+}
+
+.prose pre {
+  overflow-x: auto;
+  padding: 1em;
+  color: var(--tw-prose-pre-code);
+  background-color: var(--tw-prose-pre-bg);
+  border-radius: 0.5rem;
+}
+
+.prose pre code {
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+
+.mermaid-diagram svg {
+  display: block;
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto;
+  margin-inline: auto;
 }

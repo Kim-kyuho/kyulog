@@ -1,6 +1,7 @@
 "use client";
 import type { WritePageProps } from "@/app/types/write";
-import { useState, useRef, useEffect } from "react";
+import PostPreviewModal from "@/components/PostPreviewModal";
+import { useCallback, useDeferredValue, useState, useRef, useEffect } from "react";
 
 // Internal component handling write/edit logic
 export default function WritePage({ initialData, isEditMode = false }: WritePageProps) {
@@ -10,8 +11,11 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
   const [tags, setTags] = useState("");
   const [category, setCategory] = useState("");
   const [isPublishing, setIsPublishing] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const previewContent = useDeferredValue(content);
+  const closePreview = useCallback(() => setIsPreviewOpen(false), []);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -104,7 +108,7 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border rounded bg-white/80 dark:text-gray-700"
+          className="w-full p-2 border border-gray-200 rounded-sm bg-white/80 dark:text-gray-700"
           placeholder="Enter the title"
         />
       </div>
@@ -114,7 +118,7 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
         <textarea
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
-          className="w-full p-2 border rounded bg-white/80 dark:text-gray-700"
+          className="w-full p-2 border border-gray-200 rounded-sm bg-white/80 dark:text-gray-700"
           placeholder="Write a short summary"
         />
       </div>
@@ -124,7 +128,7 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
         <textarea
           value={tags}
           onChange={(e) => setTags(e.target.value)}
-          className="w-full p-2 border rounded bg-white/80 dark:text-gray-700"
+          className="w-full p-2 border border-gray-200 rounded-sm bg-white/80 dark:text-gray-700"
           placeholder="e.g. react, nextjs, typescript"
         />
       </div>
@@ -135,7 +139,7 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
           type="text"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-2 border rounded bg-white/80 dark:text-gray-700"
+          className="w-full p-2 border border-gray-200 rounded-sm bg-white/80 dark:text-gray-700"
           placeholder="Enter category"
         />
       </div>
@@ -169,13 +173,13 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
               alert("Image upload failed 😢");
             }
           }}
-          className="flex-1 border-2 border-dashed border-gray-300 rounded p-6 text-center text-sm text-gray-700 hover:border-blue-400"
+          className="flex-1 border-2 border-dashed border-gray-300 rounded-sm p-6 text-center text-sm text-gray-700 hover:border-blue-400"
         >
           Drag and drop an image here
         </div>
 
         <div className="w-40">
-          <label className="block font-bold text-white bg-orange-500 px-3 py-1 rounded mb-1 text-center">
+          <label className="block font-bold text-white bg-orange-500 px-3 py-1 rounded-sm mb-1 text-center">
             Select Image File
           </label>
           <input
@@ -213,15 +217,33 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
       </div>
 
       <div>
-        <label className="block font-semibold mb-1">Post Body (Markdown)</label>
+        <div className="mb-1 flex items-center justify-between gap-4">
+          <label className="font-semibold" htmlFor="post-body">
+            Post Body (Markdown)
+          </label>
+          <button
+            type="button"
+            onClick={() => setIsPreviewOpen(true)}
+            className="rounded-sm bg-sky-600 px-3 py-1 text-sm font-semibold text-white hover:bg-sky-700 active:scale-95 transition-transform"
+          >
+            Preview
+          </button>
+        </div>
         <textarea
+          id="post-body"
           ref={textareaRef}
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="w-full h-60 p-2 border rounded bg-white/80 dark:text-gray-700"
+          className="w-full h-60 p-2 border border-gray-200 rounded-sm bg-white/80 dark:text-gray-700"
           placeholder="Write your post in markdown..."
         />
       </div>
+
+      <PostPreviewModal
+        content={previewContent}
+        isOpen={isPreviewOpen}
+        onClose={closePreview}
+      />
 
       {errorMessage && <div className="text-red-500 font-medium">{errorMessage}</div>}
       {successMessage && <div className="text-green-600 font-medium">{successMessage}</div>}
@@ -229,7 +251,7 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
       <button
         onClick={handlePublish}
         disabled={isPublishing}
-        className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-pink-600 disabled:opacity-50 active:scale-95 transition-transform"
+        className="bg-gray-800 text-white px-4 py-2 rounded-sm hover:bg-pink-600 disabled:opacity-50 active:scale-95 transition-transform"
       >
         {isPublishing 
           ? isEditMode 
