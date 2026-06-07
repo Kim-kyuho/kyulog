@@ -179,10 +179,13 @@ export default function WritePage({ initialData, isEditMode = false }: WritePage
         </div>
 
         <div className="w-40">
-          <label className="block font-bold text-white bg-orange-500 px-3 py-1 rounded-sm mb-1 text-center">
+          <label 
+            className="block font-bold text-white bg-orange-500 px-3 py-1 rounded-sm mb-1 text-center"
+            htmlFor="image-upload">
             Select Image File
           </label>
           <input
+            id="image-upload"
             type="file"
             accept="image/*"
             onChange={async (e) => {
