@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs><linearGradient id="a" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse"><stop stop-color="#4b9be7"/><stop offset="1" stop-color="#2464a1"/></linearGradient></defs>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#a)"/>
+  <path d="M25 25h78" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+  <text x="102" y="99" text-anchor="end" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#fff">TS</text>
+</svg>

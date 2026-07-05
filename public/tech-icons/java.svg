@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" fill="#ffffff"/><text x="16" y="75" font-size="36" fill="#5382a1" font-family="Arial">Java</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs><linearGradient id="a" x1="14" y1="8" x2="114" y2="120" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#e8f2f8"/></linearGradient></defs>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#a)" stroke="#d9e7ef" stroke-width="2"/>
+  <path d="M64 22c-13 10 11 15-2 27M77 18c-14 13 10 18-3 31" fill="none" stroke="#e76f51" stroke-width="6" stroke-linecap="round"/>
+  <path d="M37 57h48v20c0 13-10 22-24 22s-24-9-24-22V57Z" fill="#4f86a6"/>
+  <path d="M85 63h5c13 0 14 20 0 22h-9" fill="none" stroke="#4f86a6" stroke-width="7" stroke-linecap="round"/>
+  <path d="M31 105h65" stroke="#e76f51" stroke-width="6" stroke-linecap="round"/>
+</svg>

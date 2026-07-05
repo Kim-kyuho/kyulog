@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" fill="#ffffff"/><text x="16" y="70" font-size="28" fill="#f80000" font-family="Arial">Oracle</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs><linearGradient id="a" x1="14" y1="8" x2="114" y2="120" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff0f0"/></linearGradient></defs>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#a)" stroke="#f3d7d7" stroke-width="2"/>
+  <path d="M43 41h42c14 0 25 10 25 23S99 87 85 87H43C29 87 18 77 18 64s11-23 25-23Zm1 12c-7 0-13 5-13 11s6 11 13 11h40c7 0 13-5 13-11s-6-11-13-11H44Z" fill="#f32f2f" fill-rule="evenodd"/>
+</svg>

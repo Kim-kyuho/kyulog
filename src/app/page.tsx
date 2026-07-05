@@ -14,12 +14,14 @@ export default async function HomePage() {
         <h1 className="text-2xl font-bold mb-4 text-blue-950 dark:text-gray-100">
           こんにちは！ <span role="img" aria-label="waving hand">👋</span>
         </h1>
-        <p className="text-lg leading-7 text-blue-950 dark:text-gray-100">
-          はじめまして、<strong>KYU</strong>と申します！<br />
-          コードと格闘しながら、日々「おおっ、動いた！」という小さな感動を糧に生きております。<br />
-          毎日少しずつでも学びを積み重ね、昨日の自分よりちょっとだけ成長することを目標に、エンジニア人生を満喫中です。<br />
-          バグに泣き、デバッグに笑い、気がつけば夜。そんな毎日ですが、この道のりすべてが、きっと未来の糧になると信じて、今日もエディタを開きます。<br />
-          どうぞよろしくお願いします！🙇🙇
+        <p className="text-lg leading-7 text-blue-950 dark:text-gray-100 mt-4">
+          はじめまして、<strong>Doubt-Driven Builder</strong>の<strong className="font-bold text-sky-500">KYU</strong>と申します。<br />
+          「1行のコードよりも、なぜその設計に至ったのかが重要である。」<br />
+          技術そのものを学ぶだけでなく、その背景にある文脈やシステム全体の流れを<br />
+          理解したいと考えています。<br />
+          このブログでは、開発の中で感じた違和感や疑問、設計に関する思考、<br />
+          そして実際に手を動かす中で得た学びを記録していきます。<br />
+          どうぞよろしくお願いいたします。🙇
         </p>
         <p className="text-lg leading-7 text-blue-950 dark:text-gray-100 mt-4">
           下記のリンクから、私が担当したプロジェクトをご確認いただけます。

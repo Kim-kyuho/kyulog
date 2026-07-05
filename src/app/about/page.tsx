@@ -4,12 +4,12 @@ export default function About() {
     <div className="max-w-3xl mx-auto px-4 py-8">
       {/* Introduction Section (Top Card) */}
       <div className="group bg-white hover:bg-sky-200 dark:hover:bg-gray-800 shadow-xl transition duration-300 hover:shadow-sky-200/50 dark:hover:shadow-none dark:bg-gray-800 rounded-xl p-6 mb-8">
+        <h1 className="text-2xl font-bold mb-4 text-blue-950 dark:text-gray-100">
+          問い続けるビルダー(Doubt-Driven Builder) 
+        </h1>
         <p className="text-lg leading-7 text-blue-950 dark:text-gray-100 transition duration-300 mb-1">
-          Webエンジニアの<strong>KYU</strong>と申します。Web開発を通じて使いやすく、
-          価値のあるサービスを作ることにやりがいを感じており、常に学び続ける姿勢を大切にしています。
-          <br /><br />
-          C#、Java、ASP.NET、Oracle DB、SQL Server などを用いた業務システムの開発経験があり、
-          現在は React や Next.js などの最新技術にも積極的に取り組んでいます。
+          技術や設計を鵜呑みにせず、常に「なぜそうなっているのか」を考えることを大切にしています。
+          単にコードを書くのではなく、システム全体の文脈や構造、そして設計に至るまでの思考を理解することに価値を感じています。
         </p>
       </div>
 
@@ -29,11 +29,13 @@ export default function About() {
             { src: "csharp.svg", label: "C#" },
             { src: "java.svg", label: "Java" },
             { src: "javascript.svg", label: "JavaScript" },
+            { src: "typescript.svg", label: "TypeScript" },
             { src: "react.svg", label: "React" },
             { src: "nextjs.svg", label: "Next.js" },
             { src: "aspnet.svg", label: "ASP.NET" },
             { src: "oracle.svg", label: "Oracle DB" },
             { src: "sqlserver.svg", label: "SQL Server" },
+            { src: "postgresql.svg", label: "PostgreSQL" },
           ].map((tech, idx) => (
             <div
               key={idx}

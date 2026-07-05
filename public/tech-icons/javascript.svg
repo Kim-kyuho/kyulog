@@ -1,1 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" fill="#f7df1e"/><text x="32" y="80" font-size="48" font-weight="bold" fill="black">JS</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs><linearGradient id="a" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe95b"/><stop offset="1" stop-color="#f0c900"/></linearGradient></defs>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#a)"/>
+  <path d="M25 25h78" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+  <text x="102" y="99" text-anchor="end" font-family="Arial, sans-serif" font-size="54" font-weight="700" fill="#222">JS</text>
+</svg>
