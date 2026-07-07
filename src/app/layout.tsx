@@ -11,8 +11,8 @@ export const metadata = {
   title: "Kyuho's Portfolio Blog",
   description: "Developer portfolio and tech blog",
   icons:{
-    icon: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/favicon.png?v=2",
+    apple: "/apple-touch-icon.png?v=2",
   }
 };
 
