@@ -111,6 +111,16 @@ body {
   --tw-prose-pre-bg: #1f2937;
 }
 
+.prose blockquote {
+  color: #000;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+.prose blockquote :where(*) {
+  color: inherit;
+}
+
 .prose code {
   background-color: #f3f4f6;
   border-radius: 0.25rem;
