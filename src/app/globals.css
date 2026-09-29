@@ -67,6 +67,7 @@
 }
 
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -115,6 +116,20 @@ body {
   color: #000;
   background-color: #f3f4f6;
   border-radius: 0.5rem;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.prose blockquote> :first-child,
+.prose blockquote> :first-child> :first-child,
+.prose blockquote> :first-child> :first-child> :first-child {
+  margin-top: 0;
+}
+
+.prose blockquote> :last-child,
+.prose blockquote> :last-child> :last-child,
+.prose blockquote> :last-child> :last-child> :last-child {
+  margin-bottom: 0;
 }
 
 .prose blockquote :where(*) {
